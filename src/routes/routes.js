@@ -2,11 +2,11 @@ import { createBrowserRouter } from "react-router-dom";
 import Dashboard from "../layout/Dashboard/Dashboard";
 import Main from "../layout/Main";
 import About from "../pages/About";
-import Cart from "../pages/Cart";
 import AddProduct from "../pages/Dashboard/AddProduct";
 import ProductList from "../pages/Dashboard/ProductList";
 import Home from "../pages/Home";
 import TopRated from "../pages/TopRated";
+import ProductDetails from "../pages/ProductDetails";
 
 const routes = createBrowserRouter([
   {
@@ -26,8 +26,8 @@ const routes = createBrowserRouter([
         element: <TopRated />,
       },
       {
-        path: "cart",
-        element: <Cart />,
+        path: "product-details",
+        element: <ProductDetails />,
       },
     ],
   },

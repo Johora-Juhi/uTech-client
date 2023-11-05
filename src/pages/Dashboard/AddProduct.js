@@ -25,6 +25,8 @@ const AddProduct = () => {
         if (imgData.success) {
           const product = {
             model: data.model,
+            image: imgData.data.url,
+            rating:2,
             brand: data.brand,
             status: data.status === "true" ? true : false,
             price: data.price,
@@ -109,7 +111,7 @@ const AddProduct = () => {
           <label className="mb-2 text-start" htmlFor="price">
             Price
           </label>
-          <input type="text" name="price" id="price" {...register("price", {
+          <input type="number" name="price" id="price" {...register("price", {
             required: "Price is required",
           })}
           />

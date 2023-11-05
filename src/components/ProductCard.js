@@ -16,7 +16,7 @@ const ProductCard = ({ product }) => {
         </div>
       )}
       <div className="h-52 w-52 mx-auto">
-        <img src={product.image} alt={product.model} />
+        <img src={product.image} alt={product.model} className="h-52 w-52 mx-auto object-cover"/>
       </div>
       <h1 className="font-bold text-center">{product.model}</h1>
       <p className="text-center font-semibold mb-3">Rating: {product.rating}</p>

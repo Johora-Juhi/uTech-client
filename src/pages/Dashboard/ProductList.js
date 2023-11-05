@@ -5,7 +5,7 @@ import './products.css'
 
 
 const ProductList = () => {
-  
+
   const [size, setSize] = useState(8);
   const [page, setPage] = useState(0);
 
@@ -17,7 +17,7 @@ const ProductList = () => {
       return data;
     }
   });
-  
+
   const { products, count } = productsData;
   const pages = Math.ceil(count / size);
   console.log(products);
@@ -26,7 +26,21 @@ const ProductList = () => {
     setSize(selectedValue);
     setPage(0)
   };
-
+  const removeProduct = id => {
+    fetch(`http://localhost:5000/products/${id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: `bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.deletedCount > 0) {
+          refetch();
+          toast.success('Sucessfully removed')
+        }
+      })
+  }
   return (
     <div class="flex flex-col justify-center items-center h-full w-full ">
       <div class="w-full max-w-7xl mx-auto rounded-lg  bg-white shadow-lg border border-gray-200">
@@ -58,11 +72,11 @@ const ProductList = () => {
             </thead>
 
             <tbody class="text-sm divide-y divide-gray-100">
-              {products.map((product,index) => (
-                
+              {products.map((product, index) => (
+
                 <tr>
                   <td class="p-2">
-                  <div class="text-center capitalize">{index+1}</div>
+                    <div class="text-center capitalize">{index + 1}</div>
 
                   </td>
                   <td class="p-2">
@@ -87,8 +101,9 @@ const ProductList = () => {
                   </td>
                   <td class="p-2">
                     <div class="flex justify-center">
-                      <button
+                      <label
                         // onClick={() => removeProduct(_id)}
+                        htmlFor="confirmation-modal"
                       >
                         <svg
                           class="w-8 h-8 hover:text-blue-600 rounded-full hover:bg-gray-100 p-1"
@@ -104,11 +119,25 @@ const ProductList = () => {
                             d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                           ></path>
                         </svg>
-                      </button>
+                      </label>
+                      <input type="checkbox" id="confirmation-modal" className="modal-toggle" />
+                      <div className="modal">
+                        <div className="modal-box">
+                          <h3 className="font-bold text-lg">Are you sure you want to delete!</h3>
+                          <p className="py-4">If you delete ${product.model}. It can not be done!</p>
+                          <div className="modal-action">
+                            <form method="dialog">
+                              <label onClick={() => removeProduct(product._id)} htmlFor="confirmation-modal" className="btn mr-2">delete</label>
+                              <label htmlFor="confirmation-modal" className='btn btn-outline'>Close</label>
+                            </form>
+
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </td>
                 </tr>
-               ))} 
+              ))}
             </tbody>
           </table>
           <div class="footer-tools px-4 py-3" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>

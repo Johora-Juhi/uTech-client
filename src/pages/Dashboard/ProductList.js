@@ -57,12 +57,12 @@ const ProductList = () => {
             </thead>
 
             <tbody class="text-sm divide-y divide-gray-100">
-              {products.map((product) => (
+              {products.map((product,index) => (
                 
                 <tr>
-                  {console.log(product)}
                   <td class="p-2">
-                    <input type="checkbox" class="w-5 h-5" value="id-1" />
+                  <div class="text-center capitalize">{index+1}</div>
+
                   </td>
                   <td class="p-2">
                     <div class="font-medium text-gray-800">{product.model}</div>
@@ -110,6 +110,29 @@ const ProductList = () => {
                ))} 
             </tbody>
           </table>
+          <div class="footer-tools px-4 py-3" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <div class="list-items">
+              Show
+              <select onChange={handleSelectChange} style={{ marginLeft: "7px", marginRight: "7px", border: "2px solid #005967" }}>
+                <option value="8" selected>8</option>
+                <option value="12" >12</option>
+                <option value="16">16</option>
+                <option value="20">20</option>
+              </select>
+              entries
+            </div>
+            <div class="pagination mb-0">
+              {[...Array(pages).keys()].map((number) => (
+                <button
+                  key={number}
+                  className={page === number ? "w-[26px] h-[26px] bg-indigo-500 text-white" : "w-[26px] h-[26px] bg-gray-300"}
+                  onClick={() => setPage(number)}
+                >
+                  {number + 1}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

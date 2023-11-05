@@ -1,0 +1,7 @@
+input,select{
+    outline: 0;
+    border: 1px solid #dddada;
+}
+input:focus, select:focus{
+    border-color: #C7D2FE;
+}

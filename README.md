@@ -1,6 +1,6 @@
 # uTech
 
-In This responsive website user can sort the filter the products based on their brands and availibility
+In This responsive website user can filter the products based on their brands and availibility. Some extra features are also added here like adding new product, deleting specific product
 
 ## Project run
 

@@ -26,7 +26,7 @@ const AddProduct = () => {
           const product = {
             model: data.model,
             image: imgData.data.url,
-            rating:2,
+            rating: 2,
             brand: data.brand,
             status: data.status === "true" ? true : false,
             price: data.price,
@@ -38,7 +38,7 @@ const AddProduct = () => {
             ],
             spec: [],
           };
-          fetch("http://localhost:5000/products", {
+          fetch("https://utech-server-johora-juhi.vercel.app/products", {
             method: "POST",
             headers: {
               "content-type": "application/json",

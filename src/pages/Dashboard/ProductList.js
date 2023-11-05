@@ -12,7 +12,7 @@ const ProductList = () => {
   const { data: productsData = { products: [], count: 0 }, refetch, isError, isLoading } = useQuery({
     queryKey: ["products", size, page],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/products?page=${page}&size=${size}`);
+      const res = await fetch(`https://utech-server-johora-juhi.vercel.app/products?page=${page}&size=${size}`);
       const data = await res.json();
       return data;
     }
@@ -27,7 +27,7 @@ const ProductList = () => {
     setPage(0)
   };
   const removeProduct = id => {
-    fetch(`http://localhost:5000/products/${id}`, {
+    fetch(`https://utech-server-johora-juhi.vercel.app/products/${id}`, {
       method: 'DELETE',
       headers: {
         authorization: `bearer ${localStorage.getItem('accessToken')}`
